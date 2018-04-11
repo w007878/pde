@@ -1,4 +1,5 @@
 function x = jacobi(A, b, eps)
+    % Jacobi iteration, used to solve a large linear equation group.
     D = diag(diag(A));
     U = triu(A) - D;
     L = tril(A) - D;

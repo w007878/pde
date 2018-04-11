@@ -1,4 +1,5 @@
 function val = phi_i(i, x, h, t)
+    % function phi_i(x) by interpolation
     n = size(x, 1);
     if i > 1 && x(i-1) <= t && t <= x(i)
         val = (2*(x(i)-t)/h(i)-1) * ((-t+x(i))/h(i)-1);
