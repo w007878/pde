@@ -7,4 +7,5 @@ function y = plotans(x, h, u)
         y(i-1) = y(i-1)+u(2*i-1)*phi_i(i,x,h,x(i))+u(2*i)*phi_i_5(i,x,h,x(i));
         y(i-1) = y(i-1)+u(2*i+1)*phi_i(i+1,x,h,x(i));
     end
+    y = y-1.05;
 end
