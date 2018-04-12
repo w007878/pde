@@ -11,10 +11,8 @@ function [K0, f, u] = solve(p, q, f0, x, h)
         
         K = zeros(3, 3);
         f = @(t)dphi_i(i, x, h, t)*dphi_i(i, x, h, t)*p(t)+phi_i(i, x, h, t)*phi_i(i, x, h, t)*q(t);
-        if i > 1
-            K(1, 1) = integral(f, x(i-1), x(i),'ArrayValued',true);
-        end
-        K(1, 1) = K(1, 1) + integral(f, x(i), x(i+1),'ArrayValued',true);
+
+        K(1, 1) = integral(f, x(i), x(i+1),'ArrayValued',true);
         
         f = @(t)dphi_i(i, x, h, t)*dphi_i_5(i, x, h, t)*p(t)+phi_i(i, x, h, t)*phi_i_5(i, x, h, t)*q(t);
         K(1, 2) = integral(f, x(i), x(i+1),'ArrayValued',true);
@@ -33,9 +31,7 @@ function [K0, f, u] = solve(p, q, f0, x, h)
 
         f = @(t)dphi_i(i+1, x, h, t)*dphi_i(i+1, x, h, t)*p(t)+phi_i(i+1, x, h, t)*phi_i(i+1, x, h, t)*q(t);
         K(3, 3) = integral(f, x(i), x(i+1),'ArrayValued',true);
-        if i < n-1
-            K(3, 3) = K(3, 3) + integral(f, x(i+1), x(i+2),'ArrayValued',true);
-        end
+
         K0((2*i-1):(2*i+1), (2*i-1):(2*i+1)) = K0((2*i-1):(2*i+1), (2*i-1):(2*i+1)) + K;
     end
 
