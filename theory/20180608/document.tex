@@ -1,0 +1,120 @@
+\documentclass[9pt, a4paper]{article}
+
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+
+\geometry{top=2.5cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+\begin{document}
+
+\title{微分方程作业}
+\author{15336134 莫凡}
+\maketitle
+
+\section*{5.1.3}
+
+根据截断误差的定义，有
+\begin{spacing}{2.3}
+\begin{equation}
+	\begin{array}{rcl}
+		R_j^k(u) & = & L_ku(x_j,t_k)-[Lu]_j^k\\
+				 & = & \dfrac{u(x_j,t_{k+1})-u(x_j,t_{k-1})}{2\tau}-a\dfrac{u(x_{j+1},t_k)-u(x_j,t_{k+1})-u(x_j,t_{k-1})+u(x_{j-1},t_{k})}{h^2}\\
+				 &   & - \left[\dfrac{\partial u(x_j,t_k)}{\partial t}-a\dfrac{\partial^2 u(x_j,t_k)}{\partial x^2}\right]
+	\end{array}
+\end{equation}
+\end{spacing}
+
+由泰勒展开可以得到
+
+\begin{spacing}{2.3}
+\begin{equation}
+	\begin{array}{rcl}
+		u(x_j,t) & = & u(x_j,t_k) + \dfrac{\partial u(x_j, t_k)}{\partial t}(t-t_k)\\
+				 &   & + \dfrac{1}{2}\dfrac{\partial^2 u(x_j,t_k)}{\partial t^2}(t-t_k)^2
+					   + \dfrac{1}{3!}\dfrac{\partial^3 u(x_j,t_k)}{\partial t^3}(t-t_k)^3\\
+				 &   & + o\left((t-t_k)^4\right)
+	\end{array}
+\end{equation}
+\end{spacing}
+
+然后带入可以得到
+\begin{spacing}{2.3}
+\begin{equation}
+	\begin{array}{rcl}
+		\dfrac{u(x_j,t_{k+1})-u(x_j,t_{k-1})}{2\tau}&=&\dfrac{\partial u(x_j,t_k)}{\partial t}+\dfrac{\tau^2}{6}\dfrac{\partial^3u(x_j,t_k)}{\partial t^3}+O(\tau^3)\\
+		& = & \dfrac{\partial u(x_j,t_k)}{\partial t}+O(\tau^2)
+	\end{array}
+\end{equation}
+\end{spacing}
+
+然后对另一维度进行泰勒展开
+
+\begin{spacing}{2.3}
+\begin{equation}
+	\begin{array}{rcl}
+		u(x,t_k) & = & u(x_j,t_k) + \dfrac{\partial u(x_j, t_k)}{\partial x}(x-x_j)\\
+			   	 &   & + \dfrac{1}{2}\dfrac{\partial^2 u(x_j,t_k)}{\partial x^2}(x-x_j)^2+\dfrac{1}{3!}\dfrac{\partial^3 u(x_j,t_k)}{\partial x^3}(x-x_j)^3\\
+				 &   & + O\left((x-x_j)^4\right)
+	\end{array}
+\end{equation}
+\end{spacing}
+
+带入式子的另一部分
+\begin{spacing}{2.3}
+\begin{equation}
+	\begin{array}{ll}
+		& \dfrac{u(x_{j+1},t_k)-u(x_j,t_{k+1})-u(x_j,t_{k-1})+u(x_{j-1},t_{k})}{h^2}\\
+		=& \dfrac{\partial^2u(x_j,t_k)}{\partial x^2}+\dfrac{h^2}{2}\dfrac{\partial^4u(x_j,t_k)}{\partial x^4}+O(h^4)-\dfrac{\tau^2}{h^2}\dfrac{\partial^2u(x_j,t_k)}{\partial t^2}+O(\dfrac{\tau^4}{h^2})\\
+		=& \dfrac{\partial^2u(x_j,t_k)}{\partial x^2}+O(h^2)+O(\dfrac{\tau^2}{h^2}) 
+	\end{array}
+\end{equation}
+\end{spacing}
+
+因此，总的截断误差带入得到
+\begin{equation}
+	R_j^k(u)=O(\tau^2)+O(h^2)+O(\dfrac{\tau^2}{h^2})
+\end{equation}
+
+\section*{5.1.4}
+根据截断误差的定义，有
+\begin{spacing}{2.3}
+	\begin{equation}
+	\begin{array}{rcl}
+	R_j^k(u) & = & L_ku(x_j,t_k)-[Lu]_j^k\\
+	& = & (1+\theta)\dfrac{u(x_j,t_{k+1})-u(x_j,t_k)}{\tau}-\theta \dfrac{u(x_j,t_k)-u(x_j,t_{k-1})}{\tau}\\
+	&   & - \dfrac{a}{h^2}\left[u(x_{j+1},t_{k+1})-2u(x_j,t_{k+1})+u(x_{j-1},t_{k+1})\right]- \left[\dfrac{\partial u(x_j,t_k)}{\partial t}-a\dfrac{\partial^2 u(x_j,t_k)}{\partial x^2}\right]
+	\end{array}
+	\end{equation}
+\end{spacing}
+根据泰勒展开分别计算
+\begin{spacing}{2.3}
+	\begin{equation}
+	\begin{array}{cl}
+		& \dfrac{1}{\tau}[u(x_j,t_{k+1})-u(x_j,t_k)] \\
+	  = & \dfrac{1}{\tau}[u(x_j,t_k)+\tau\dfrac{\partial u(x_j,t_k)}{\partial t}+\dfrac{\tau^2}{2!}\dfrac{\partial^2u(x_j,t_k)}{\partial t^2}+O(\tau^3)-u(x_j,t_k)]\\
+	  = & \dfrac{\partial u(x_j,t_k)}{\partial t}+\dfrac{\tau}{2}\dfrac{\partial^2u(x_j,t_k)}{\partial t^2}+O(\tau^2)
+	\end{array}
+	\end{equation}
+\end{spacing}
+并且由上一题可以得到
+\begin{spacing}{2.3}
+	\begin{equation}
+	\begin{array}{cl}
+		 & \dfrac{1}{h^2}[u(x_{j+1},t_{k+1})-2u(x_j,t_{k+1})+u(x_{j-1},t_{k+1})]\\
+		=& \dfrac{\partial^2u(x_j,t_k)}{\partial x^2}+\left(\dfrac{h^2}{12}+at\right)\dfrac{\partial^4u(x_j,t_k)}{\partial x^4}+O(\tau^2)+O(\tau^2h^2)+O(h^4)
+	\end{array}
+	\end{equation}
+\end{spacing}
+带入得到
+\begin{spacing}{2.3}
+	\begin{equation}
+	R_j^k(u)=a[a\tau(\theta-\dfrac{1}{2})-\dfrac{h^2}{12}]\dfrac{\partial^4u(x_j,t_k)}{\partial x^4}+O(\tau^2)+O(\tau^2h^2)+O(h^4)
+	\end{equation}
+\end{spacing}
+
+则当$a\tau(\theta-\dfrac{1}{2})-\dfrac{h^2}{12}=0$，即$\theta=\dfrac{1}{2}+\dfrac{1}{12r}$时，截断误差的阶最高为$O(\tau^2+h^4)$
+
+\end{document}
