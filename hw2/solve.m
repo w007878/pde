@@ -1,4 +1,4 @@
-function [K0, f, u] = solve(p, q, f0, x, h)
+function [K0, u] = solve(p, q, f0, x, h)
     n = size(x,1);
     
     % The following part is to build Matrix K0 and vector b related to the
@@ -51,6 +51,7 @@ function [K0, f, u] = solve(p, q, f0, x, h)
         b(2*i) = integral(f, x(i), x(i+1),'ArrayValued',true);
     end
     
-    % Solve the equations with Jacobi iteration method.
-    u = jacobi(K0, b, 1e-5);
+    % Solve the equations.
+    u = K0\b;
+    % u = jacobi(K0, b, 1e-5);
 end

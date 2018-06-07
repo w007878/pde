@@ -13,8 +13,19 @@
 	
 \title{微分方程实验二：二次有限元方法求解两点边值问题}
 \author{15336134 莫凡}
+\date{\today\quad Ver. 2}
 \maketitle
-	
+
+\setcounter{section}{-1}
+
+\section{更新说明}
+
+更正了刚度矩阵子矩阵的计算，删去原来计算重复的部分,得到了更为准确的结果
+
+使用Mathematica计算出了正确的答案，并与程序答案进行对比
+
+放弃了具有数值问题的雅可比迭代
+
 \section{实验假设}
 
 这次实验是实验一：使用线性有限元求解两点边值问题的改进。使用二次有限元方法求解两点边值问题
@@ -80,16 +91,32 @@
 最后得到刚度矩阵，由于它显然是一个严格对角占优的大型稀疏矩阵，所以最后使用Jacobi方法求出方程的解。具体流程请参见代码及其中简明注释。
 
 \section{实验结果}
-得到了一个效果不是很好的结果，应该是哪里出了一点问题，本着实事求是的原则就这么贴上来，日后再回来仔细修正
 
-\includegraphics[width=200pt]{res.png}
+通过运行程序，得到了如下结果
 
-在一些很简单的多项式函数上没有问题。
+\vspace{10pt}
+\includegraphics[width=300pt]{res.png}
+\vspace{10pt}
+
+使用Mathematica得到此问题的解析解
+\begin{equation}
+	u(x)=2x+ae^{\frac{\pi x}{2}}-ae^{\frac{\pi x}{2}} 
+\end{equation}
+其中$a=-0.253716$
+
+图像如下
+
+\vspace{10pt}
+\includegraphics[width=300pt]{real.png}
+\vspace{10pt}
+
+发现结果的主要问题在于函数值偏小。有可能是边值条件不满足造成的解析解中常数的偏差较大。
 
 \section{实验心得}
 
 要时刻注意数组下标加一减一的问题。MATLAB的函数句柄在判断返回值类型的时候会出现一些问题。要善于利用多种多样的计算工具。讨论有助于交流经验及发现问题。
 
+今后会对此实验以及之前的实验一进行进一步的更新
 
 \section{附件}
 \begin{itemize}

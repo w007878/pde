@@ -6,6 +6,7 @@ function x = jacobi(A, b, eps)
     x = ones(size(A, 1), 1);
     x0 = x;
     x = pinv(D)*(L+U)*x+pinv(D)*b;
+    disp(x);
     while norm(x - x0) > eps
         x0 = x;
         x = pinv(D)*(L+U)*x+pinv(D)*b;

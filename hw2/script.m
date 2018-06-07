@@ -4,9 +4,9 @@ p = @(x)1;
 q = @(x)power(pi/2,2);
 
 % Random choose x by normal distribution.
-x = unique(sort(min(1,max(0, [0; 1; normrnd(0.5, 0.3, 100, 1)]))));
-n = size(x,1);
-h = zeros(n);
+x = unique(sort(min(1, max(0, [0; 1; normrnd(0.5, 0.3, 100, 1)]))));
+n = size(x, 1);
+h = zeros(n, 1);
     
 % compute the difference between two point
     
@@ -15,7 +15,8 @@ for i = uint32(2:n)
 end
 
 % Solve the problem
-[K, f, u] = solve(p, q, f, x, h);
+
+[K, u] = solve(p, q, f, x, h);
 
 y = plotans(x, h, u);
 plot(x(2:(n-1)), y);
